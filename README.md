@@ -1,69 +1,86 @@
-# Predicting Spotify Song Popularity with Machine Learning
+Predicting Spotify Song Popularity with Machine Learning
 
-A portfolio-ready regression project that predicts a Spotify track's **popularity** score from audio features like `danceability`, `energy`, `valence`, `tempo`, etc.
+This project uses machine learning to predict a song’s popularity score on Spotify based on its audio features such as danceability, energy, valence, and tempo. I wanted to explore what makes certain songs more popular than others and see how well data can capture musical trends.
 
-## Why this is internship-ready
-- Clear, reproducible **Jupyter workflow** (EDA → modeling → evaluation)
-- Multiple **regression models** with tuned hyperparameters
-- Clean project structure and **README** documentation
-- Optional **Streamlit app** for interactive demos
-- Optional **Spotify API** integration for live lookups
+Project Overview
 
-## Dataset
-Use either:
-1. **Kaggle**: *Ultimate Spotify Tracks DB* (CSV) — place the file at `data/spotify_tracks.csv`
-2. **Spotify Web API** via `spotipy` — collect your own dataset with `src/collect_spotify_api.py` (to add later if desired)
+I used data from Spotify’s public tracks database on Kaggle and tested several regression models to predict a song’s popularity. The project includes data cleaning, exploration, model building, and evaluation in a Jupyter notebook.
 
-> Expected columns include: `danceability, energy, key, loudness, speechiness, acousticness, instrumentalness, liveness, valence, tempo, duration_ms, popularity, year, explicit, mode, time_signature, artist, track_name, track_id` (columns beyond features will be dropped in modeling).
+There’s also an optional Streamlit app that lets you adjust song features and instantly see the predicted popularity score.
 
-## Quickstart
+Dataset
 
-```bash
-# 1) Create and activate a virtual environment (recommended)
+You can use one of the following:
+
+Kaggle: Ultimate Spotify Tracks DB
+ — place the file in data/spotify_tracks.csv
+
+Spotify Web API: You can also collect your own dataset using the spotipy Python library (this is optional).
+
+The dataset includes features like:
+danceability, energy, loudness, speechiness, acousticness, instrumentalness, liveness, valence, tempo, duration_ms, and popularity.
+
+How to Run It
+# 1. Create and activate a virtual environment
 python -m venv .venv
-# Windows: .venv\Scripts\activate
+# Windows:
+.venv\Scripts\activate
 # macOS/Linux:
 source .venv/bin/activate
 
-# 2) Install requirements
+# 2. Install required packages
 pip install -r requirements.txt
 
-# 3) Put the dataset in place
-#    Save your CSV as: data/spotify_tracks.csv
+# 3. Place your dataset in the data folder
+# Example:
+# data/spotify_tracks.csv
 
-# 4) Open the notebook
-jupyter lab  # or jupyter notebook
-# Run: notebooks/01_spotify_popularity.ipynb
+# 4. Open the Jupyter notebook
+jupyter lab
+# or
+jupyter notebook
 
-# 5) (Optional) Train & persist from CLI
+# 5. Run the notebook step-by-step
+# notebooks/01_spotify_popularity.ipynb
+
+
+You can also train and evaluate models directly from the command line:
+
 python src/train.py --data data/spotify_tracks.csv --model-out models/final_model.pkl
 python src/evaluate.py --data data/spotify_tracks.csv --model models/final_model.pkl
 
-# 6) (Optional) Run the Streamlit app
-streamlit run app/streamlit_app.py
-```
 
-## Project Structure
-```
+To try the Streamlit web app:
+
+streamlit run app/streamlit_app.py
+
+Project Structure
 spotify_popularity_prediction/
 ├── app/
 │   └── streamlit_app.py
 ├── data/
-│   └── spotify_tracks.csv           # <- put your dataset here
+│   └── spotify_tracks.csv
 ├── models/
-│   └── final_model.pkl              # saved after training
+│   └── final_model.pkl
 ├── notebooks/
-│   └── 01_spotify_popularity.ipynb  # full EDA→modeling notebook
+│   └── 01_spotify_popularity.ipynb
 ├── src/
 │   ├── train.py
 │   ├── evaluate.py
 │   └── utils.py
 ├── requirements.txt
 └── README.md
-```
 
-## Notes
-- The notebook uses `scikit-learn` pipelines and `GridSearchCV` to compare: **LinearRegression, Ridge, Lasso, RandomForestRegressor, XGBRegressor** (if available).
-- SHAP-based interpretability is included if you choose to install `shap`.
-- The Streamlit app works even **without** Spotify credentials by allowing manual feature input; with credentials, it can auto-fetch song features.
-# Spotify-popularity-prediction
+Notes
+
+The project compares several regression models: Linear Regression, Ridge, Lasso, Random Forest, and XGBoost.
+
+GridSearchCV is used to tune hyperparameters.
+
+SHAP interpretability is supported if installed.
+
+The Streamlit app works without Spotify API credentials, but you can connect the API to fetch live song features.
+
+Reflection
+
+This project helped me practice real-world data science steps: cleaning and preparing data, building regression models, and interpreting results. It was interesting to see how audio features like energy, valence, and danceability affect a song’s popularity.
